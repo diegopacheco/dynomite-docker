@@ -2,19 +2,17 @@
 Simple Docker Image for Dynomite. 
 
 ## How to use it?
-```bash
 1. Download and instal Java 8
 2. Download and install Docker.
 3. Bake docker images $ ./bake_docker.sh
 3. Create the Dynomite clusters $ ./create-dynomite-docker-cluster.sh
-```
 
 ## How it works? 
 1. We bake a docker image with Dynomiete v0.5.7-14 and Redis 3.x.
 2. We create 2 clusters - each cluster has 3 nodes.
 3. In the end of the script(create-dynomite-docker-cluster.sh) you will see all seeds(We also run Dynomite Cluster Checker)
 4. You just need run bake_docker.sh 1 time.
-5. You can run create-dynomite-docker-cluster.sh as many times as you want. First thing on the script we delete old docker images and old docker network - so we create new docker images and network everything you the script create-dynomite-docker-cluster.sh. 
+5. You can run create-dynomite-docker-cluster.sh as many times as you want. First thing on the script we delete old docker images and old docker network - so we create new docker images and network every time you run the script create-dynomite-docker-cluster.sh. 
 
 ## What are my seeds?
 
