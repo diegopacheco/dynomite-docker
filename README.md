@@ -27,6 +27,16 @@ Seeds - Cluster 1
 Seeds - Cluster 2
 172.18.0.201:8101:rack1:dc:100|172.18.0.202:8101:rack2:dc:100|172.18.0.203:8101:rack3:dc:100
 ```
+## What are my seeds?
+
+Cluster 1
+```bash
+172.18.0.101:8101:rack1:dc:100|172.18.0.102:8101:rack2:dc:100|172.18.0.103:8101:rack3:dc:100
+```
+Cluster 2
+```bash
+172.18.0.201:8101:rack1:dc:100|172.18.0.202:8101:rack2:dc:100|172.18.0.203:8101:rack3:dc:100
+```
 
 ## Integrated with DCC checks. 
 
