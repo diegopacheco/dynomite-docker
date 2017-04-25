@@ -25,6 +25,22 @@ Cluster 2
 172.18.0.201:8101:rack1:dc:100|172.18.0.202:8101:rack2:dc:100|172.18.0.203:8101:rack3:dc:100
 ```
 
+## What's is the cluster Topology?
+
+Cluster 1 
+```bash
+node: 1 - ip: 172.18.0.101 - Tokens: 100 - Rack: rack1 - DC: dc 
+node: 2 - ip: 172.18.0.102 - Tokens: 100 - Rack: rack2 - DC: dc
+node: 3 - ip: 172.18.0.103 - Tokens: 100 - Rack: rack3 - DC: dc
+```
+
+Cluster 2 
+```bash
+node: 1 - ip: 172.18.0.201 - Tokens: 100 - Rack: rack1 - DC: dc 
+node: 2 - ip: 172.18.0.202 - Tokens: 100 - Rack: rack2 - DC: dc
+node: 3 - ip: 172.18.0.203 - Tokens: 100 - Rack: rack3 - DC: dc
+```
+
 ## Integrated with DCC checks. 
 
 This scritps will run DCC(https://github.com/diegopacheco/dynomite-cluster-checker). You should see something like this.
