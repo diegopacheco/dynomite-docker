@@ -3,8 +3,9 @@ Simple Docker Image for Dynomite.
 
 ## How to use it?
 ```bash
-1. Download and install Docker.
-2. Bake docker images $ ./bake_docker.sh
+1. Download and instal Java 8
+2. Download and install Docker.
+3. Bake docker images $ ./bake_docker.sh
 3. Create the Dynomite clusters $ ./create-dynomite-docker-cluster.sh
 ```
 
