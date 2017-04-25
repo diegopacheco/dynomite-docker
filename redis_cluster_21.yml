@@ -1,0 +1,12 @@
+dyn_o_mite:
+  datacenter: dc
+  rack: rack1
+  dyn_listen: 0.0.0.0:8101
+  listen: 0.0.0.0:8102
+  dyn_seed_provider: simple_provider 
+  dyn_seeds:
+  - 172.18.0.202:8101:rack2:dc:100
+  - 172.18.0.203:8101:rack3:dc:100
+  servers:
+  - 127.0.0.1:6379:1
+  tokens: '100'
