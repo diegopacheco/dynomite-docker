@@ -11,15 +11,21 @@ RUN apt-get update && apt-get install -y \
 	python-software-properties \
 	redis-server \
 	tcl8.5 \
-	dos2unix \ 
+	dos2unix \
 	unzip
 
-RUN git clone https://github.com/Netflix/dynomite.git
+RUN mkdir /dynomite-0.5.7/ &&  cd /dynomite-0.5.7/ && git clone https://github.com/Netflix/dynomite.git
+RUN cd /dynomite-0.5.7/dynomite/ && git checkout tags/v0.5.7-14_whiteSpaceStats
 
-RUN cd /dynomite/ && git checkout tags/v0.5.7-14_whiteSpaceStats 
+RUN mkdir /dynomite-0.5.8/ &&  cd /dynomite-0.5.8/ && git clone https://github.com/Netflix/dynomite.git
+RUN cd /dynomite-0.5.8/dynomite/ && git checkout tags/v0.5.8-5_HgetallLocalRack
+
+RUN mkdir /dynomite-0.5.9/ &&  cd /dynomite-0.5.9/ && git clone https://github.com/Netflix/dynomite.git
+RUN cd /dynomite-0.5.9/dynomite/ && git checkout tags/v0.5.9-2_ProxyCloseFix
 
 ADD redis.conf /etc/redis/
 ADD start.sh /usr/local/dynomite/
+RUN mkdir /dynomite/ && mkdir /dynomite/conf/
 COPY redis_cluster_1.yml /dynomite/conf/redis_cluster_1.yml
 COPY redis_cluster_2.yml /dynomite/conf/redis_cluster_2.yml
 COPY redis_cluster_3.yml /dynomite/conf/redis_cluster_3.yml
@@ -29,13 +35,26 @@ COPY redis_cluster_23.yml /dynomite/conf/redis_cluster_23.yml
 
 RUN chmod 777 /usr/local/dynomite/start.sh
 
-WORKDIR /dynomite/
-
+WORKDIR /dynomite-0.5.7/dynomite/
 RUN autoreconf -fvi \
 	&& ./configure --enable-debug=log \
 	&& CFLAGS="-ggdb3 -O0" ./configure --enable-debug=log \
 	&& make \
 	&& make install
+
+WORKDIR /dynomite-0.5.8/dynomite/
+RUN autoreconf -fvi \
+		&& ./configure --enable-debug=log \
+		&& CFLAGS="-ggdb3 -O0" ./configure --enable-debug=log \
+		&& make \
+		&& make install
+
+WORKDIR /dynomite-0.5.9/dynomite/
+RUN autoreconf -fvi \
+		&& ./configure --enable-debug=log \
+		&& CFLAGS="-ggdb3 -O0" ./configure --enable-debug=log \
+		&& make \
+		&& make install
 
 EXPOSE 8101
 EXPOSE 6379
