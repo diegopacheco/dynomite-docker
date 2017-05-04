@@ -9,9 +9,9 @@ Simple Docker Image for Dynomite.
 
 ## What dynomite versions are suppoorted?
 
-1. 0.5.7-14 <BR> 
-2. 0.5.8-5 <BR>
-3. 0.5.9-2 <BR>
+* 0.5.7-14 <BR> 
+* 0.5.8-5 <BR>
+* 0.5.9-2 <BR>
 
 ## What parameters can I use? 
 ```bash
