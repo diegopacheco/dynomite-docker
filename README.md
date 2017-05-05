@@ -1,11 +1,18 @@
 # dynomite-docker
 Simple Docker Image for Dynomite. 
 
-## How to use it?
+## Linux: How to use it?
 1. Download and instal Java 8
 2. Download and install Docker.
 3. Bake docker images $ ./dynomite-docker.sh bake
 3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.7
+
+## Windows: How to use it?
+1. Download and instal Virtual Box 5
+2. Download and install Vagrant
+3. vagrant up 
+4. vagrant ssh
+5. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.7
 
 ## What dynomite versions are suppoorted?
 
