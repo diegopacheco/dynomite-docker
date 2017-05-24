@@ -40,6 +40,16 @@ function setupClusters(){
   docker ps
 }
 
+function setupSingleClusters(){
+  SHARED=/usr/local/docker-shared/dynomite/:/var/lib/redis/
+
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.101 --name dynomite1 -e DYNOMITE_NODE=1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.102 --name dynomite2 -e DYNOMITE_NODE=2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.103 --name dynomite3 -e DYNOMITE_NODE=3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  
+  docker ps
+}
+
 function runDcc(){
   mkdir /tmp/dcc > /dev/null 2>&1
   cd /tmp/dcc/
@@ -48,6 +58,16 @@ function runDcc(){
 
   ./gradlew execute -Dexec.args="$seeds1"
   ./gradlew execute -Dexec.args="$seeds2"
+  docker ps
+}
+
+function runDccSingle(){
+  mkdir /tmp/dcc > /dev/null 2>&1
+  cd /tmp/dcc/
+  git clone https://github.com/diegopacheco/dynomite-cluster-checker > /dev/null 2>&1
+  cd dynomite-cluster-checker/dynomite-cluster-checker
+
+  ./gradlew execute -Dexec.args="$seeds1"
   docker ps
 }
 
@@ -63,6 +83,30 @@ function run(){
     else
       echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8 or 0.5.9"
     fi
+}
+
+function runSingle(){
+    echo "$DV"
+    if [[ "$DV" = *[!\ ]* ]];
+    then
+      cleanUp
+      setUpNetwork
+      setupSingleClusters
+      infoSingle
+    else
+      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8 or 0.5.9"
+    fi
+}
+
+function infoSingle(){
+  echo "Cluster 1 - Topology :"
+  echo "token: 100 dc: dc"
+  echo "  rack1 - 172.18.0.101"
+  echo "  rack2 - 172.18.0.102"
+  echo "  rack3 - 172.18.0.103"
+  echo "Seeds: $seeds1"
+  echo ""
+  echo "Avaliable Dynomite version: v0.5.7, v0.5.8 and v0.5.9"
 }
 
 function info(){
@@ -87,12 +131,14 @@ function help(){
    echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
    echo "functions: "
    echo ""
-   echo "bake  : Bakes docker image"
-   echo "run   : Run Dynomite docker clusters"
-   echo "dcc   : Run Dynomite Cluster Checker"
-   echo "info  : Get Seeds, IPs and topologies"
-   echo "stop  : Stop and clean up all docker running images"
-   echo "help  : help documentation"
+   echo "bake        : Bakes docker image"
+   echo "run         : Run Dynomite docker 2 clusters for dual write"
+   echo "run_single  : Run Dynomite docker Single cluster"  
+   echo "dcc         : Run Dynomite Cluster Checker for 2 clusters"
+   echo "dcc_single  : Run Dynomite Cluster Checker for single cluster"
+   echo "info        : Get Seeds, IPs and topologies"
+   echo "stop        : Stop and clean up all docker running images"
+   echo "help        : help documentation"
 }
 
 case $1 in
@@ -102,8 +148,14 @@ case $1 in
      "run")
           run
           ;;
+     "run_single")
+          runSingle
+          ;;
      "dcc")
           runDcc
+          ;;
+     "dcc_single")
+          runDccSingle
           ;;
      "info")
           info
