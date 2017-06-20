@@ -137,8 +137,13 @@ function help(){
    echo "dcc         : Run Dynomite Cluster Checker for 2 clusters"
    echo "dcc_single  : Run Dynomite Cluster Checker for single cluster"
    echo "info        : Get Seeds, IPs and topologies"
+   echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
    echo "stop        : Stop and clean up all docker running images"
    echo "help        : help documentation"
+}
+
+function log(){
+  docker exec -i -t dynomite$DV cat /var/log/dynomite/dynomite_log.txt
 }
 
 case $1 in
@@ -160,6 +165,9 @@ case $1 in
      "info")
           info
           ;;
+     "log")
+          log
+          ;;	  
      "stop")
           cleanUp
           ;;
