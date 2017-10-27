@@ -7,7 +7,18 @@ Simple Docker Image for Dynomite.
 3. Bake docker images $ ./dynomite-docker.sh bake
 3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.7
 
-## Windows: How to use it?
+## Windows/Mac: How to use it?
+
+#### Docker
+
+1. Install docker
+2. Get docker public/host IP
+3. change dynomite-docker.sh script and use -P before docker run the cluster.
+4. change the paths for /usr/ to your local path
+5. do Docker ps and get the dynamic ports mapping for 8102 and change the seeds config. 
+
+#### Vagrant
+
 1. Download and instal Virtual Box 5
 2. Download and install Vagrant
 3. vagrant up 
