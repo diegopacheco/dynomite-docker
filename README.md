@@ -1,11 +1,12 @@
 # dynomite-docker
-Simple Docker Image for Dynomite. 
+
+Simple Docker Image for Dynomite. Dynomite-docker provides utilitys to create clusters, get seeds, test cluster health and replication via DCC.
 
 ## Linux: How to use it?
 1. Download and instal Java 8
 2. Download and install Docker.
 3. Bake docker images $ ./dynomite-docker.sh bake
-3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.7
+3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
 
 ## Windows/Mac: How to use it?
 
@@ -15,7 +16,9 @@ Simple Docker Image for Dynomite.
 2. Get docker public/host IP
 3. change dynomite-docker.sh script and use -P before docker run the cluster.
 4. change the paths for /usr/ to your local path
-5. do Docker ps and get the dynamic ports mapping for 8102 and change the seeds config. 
+5. do Docker ps and get the dynamic ports mapping for 8102 and change the seeds config also use docker public ip on seeds. 
+6. (just 1 time) Bake docker images $ ./dynomite-docker.sh bake
+7. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
 
 #### Vagrant
 
@@ -23,7 +26,7 @@ Simple Docker Image for Dynomite.
 2. Download and install Vagrant
 3. vagrant up 
 4. vagrant ssh
-5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.7
+5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.8
 
 ## What dynomite versions are suppoorted?
 
