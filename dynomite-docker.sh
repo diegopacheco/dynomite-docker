@@ -46,7 +46,7 @@ function setupSingleClusters(){
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.101 --name dynomite1 -e DYNOMITE_NODE=1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.102 --name dynomite2 -e DYNOMITE_NODE=2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.103 --name dynomite3 -e DYNOMITE_NODE=3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
-  
+
   docker ps
 }
 
@@ -133,17 +133,27 @@ function help(){
    echo ""
    echo "bake        : Bakes docker image"
    echo "run         : Run Dynomite docker 2 clusters for dual write"
-   echo "run_single  : Run Dynomite docker Single cluster"  
+   echo "run_single  : Run Dynomite docker Single cluster"
    echo "dcc         : Run Dynomite Cluster Checker for 2 clusters"
    echo "dcc_single  : Run Dynomite Cluster Checker for single cluster"
    echo "info        : Get Seeds, IPs and topologies"
    echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
+   echo "cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1"
    echo "stop        : Stop and clean up all docker running images"
    echo "help        : help documentation"
 }
 
 function log(){
   docker exec -i -t dynomite$DV cat /var/log/dynomite/dynomite_log.txt
+}
+
+function rediscli(){
+  if [[ "$DV" = *[!\ ]* ]];
+  then
+    docker exec -it dynomite$DV redis-cli -p 8102
+  else
+    echo "Mising Dynomite node! Aborting! You need pass the node: 1, 2 or 3"
+  fi
 }
 
 case $1 in
@@ -167,7 +177,10 @@ case $1 in
           ;;
      "log")
           log
-          ;;	  
+          ;;
+      "cli")
+          rediscli
+          ;;
      "stop")
           cleanUp
           ;;

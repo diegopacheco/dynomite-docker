@@ -9,15 +9,15 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 3. Bake docker images $ ./dynomite-docker.sh bake
 3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
 
-## Windows/Mac: How to use it? 
+## Windows/Mac: How to use it?
 
 #### Docker (Require changes on bash script)
 
 1. Install docker
 2. Get docker public/host IP
-3. change dynomite-docker.sh script and use -P before docker run the cluster.
-4. change the paths for /usr/ to your local path
-5. do Docker ps and get the dynamic ports mapping for 8102 and change the seeds config also use docker public ip on seeds. 
+3. Change dynomite-docker.sh script and use -P before (docker run) the cluster.
+4. Change the paths for /usr/ to your local path
+5. Do Docker ps and get the dynamic ports mapping for 8102 and change the seeds config also use docker public ip on seeds.
 6. (just 1 time) Bake docker images $ ./dynomite-docker.sh bake
 7. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
 
@@ -25,37 +25,41 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 
 1. Download and instal Virtual Box 5
 2. Download and install Vagrant
-3. vagrant up 
+3. vagrant up
 4. vagrant ssh
 5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.8
 
 ## What dynomite versions are suppoorted?
 
-* 0.5.7-14 <BR> 
+* 0.5.7-14 <BR>
 * 0.5.8-5 <BR>
 * 0.5.9-2 <BR>
 
-## What parameters can I use? 
+## What parameters can I use?
 ```bash
 $ ./dynomite-docker.sh help
 dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco.
-functions: 
+functions:
 
-bake  : Bakes docker image
-run   : Run Dynomite docker clusters
-dcc   : Run Dynomite Cluster Checker
-info  : Get Seeds, IPs and topologies
-stop  : Stop and clean up all docker running images
-help  : help documentation
+bake        : Bakes docker image
+run         : Run Dynomite docker 2 clusters for dual write
+run_single  : Run Dynomite docker Single cluster
+dcc         : Run Dynomite Cluster Checker for 2 clusters
+dcc_single  : Run Dynomite Cluster Checker for single cluster
+info        : Get Seeds, IPs and topologies
+log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1
+cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1
+stop        : Stop and clean up all docker running images
+help        : help documentation
 ```
 
-## How it works? 
+## How it works?
 
 1. We bake a docker image with Dynomiete v0.5.X and Redis 3.x.
 2. We create 2 clusters - each cluster has 3 nodes.
 3. In the end of the script(./dynomite-docker.sh run DYNOMITE_VERSION) you will see all seeds(We also run Dynomite Cluster Checker)
 4. You just need run ./dynomite-docker.sh bake 1 time.
-5. You can run ./dynomite-docker.sh run as many times as you want. First thing on the script we delete old docker images and old docker network - so we create new docker images and network every time you run the script create-dynomite-docker-cluster.sh. 
+5. You can run ./dynomite-docker.sh run as many times as you want. First thing on the script we delete old docker images and old docker network - so we create new docker images and network every time you run the script create-dynomite-docker-cluster.sh.
 
 ## What are my seeds?
 
@@ -70,29 +74,29 @@ Cluster 2
 
 ## What's is the cluster Topology?
 
-Cluster 1 
+Cluster 1
 ```bash
-node: 1 - ip: 172.18.0.101 - Tokens: 100 - Rack: rack1 - DC: dc 
+node: 1 - ip: 172.18.0.101 - Tokens: 100 - Rack: rack1 - DC: dc
 node: 2 - ip: 172.18.0.102 - Tokens: 100 - Rack: rack2 - DC: dc
 node: 3 - ip: 172.18.0.103 - Tokens: 100 - Rack: rack3 - DC: dc
 ```
 
-Cluster 2 
+Cluster 2
 ```bash
-node: 1 - ip: 172.18.0.201 - Tokens: 100 - Rack: rack1 - DC: dc 
+node: 1 - ip: 172.18.0.201 - Tokens: 100 - Rack: rack1 - DC: dc
 node: 2 - ip: 172.18.0.202 - Tokens: 100 - Rack: rack2 - DC: dc
 node: 3 - ip: 172.18.0.203 - Tokens: 100 - Rack: rack3 - DC: dc
 ```
 
-## Integrated with DCC checks. 
+## Integrated with DCC checks.
 
 This scritps will run DCC(https://github.com/diegopacheco/dynomite-cluster-checker). You should see something like this.
 
 ```bash
 **** BEGIN DYNOMITE CLUSTER CHECKER ****
-1. Checking cluster connection... 
-    OK - All nodes are accessible! 
-2. Checking cluster data replication... 
+1. Checking cluster connection...
+    OK - All nodes are accessible!
+2. Checking cluster data replication...
 SEEDS: [172.18.0.101:8101:rack1:dc:100, 172.18.0.102:8101:rack2:dc:100, 172.18.0.103:8101:rack3:dc:100]
 Checking Node: 172.18.0.101
   TIME to   Insert DCC_dynomite_123_kt - Value: DCC_replication_works: 6.0 ms - 0 s
@@ -104,13 +108,13 @@ Checking Node: 172.18.0.102
 Checking Node: 172.18.0.103
   TIME to   Get: DCC_dynomite_123_kt : 3.0 ms - 0 s
   200 OK - set/get working fine!
-3. Checking cluster failover... 
+3. Checking cluster failover...
 All Seeds Cluster Failover test: OK
-4. Results as JSON... 
+4. Results as JSON...
 {
  "timeToRun": "3 seconds",
  "failoverStatus": "OK",
- "badNodes": [], 
+ "badNodes": [],
  "nodesReport":
 [
   {
@@ -139,9 +143,9 @@ All Seeds Cluster Failover test: OK
 ```bash
 **** BEGIN DYNOMITE CLUSTER CHECKER ****
 
-1. Checking cluster connection... 
-    OK - All nodes are accessible! 
-2. Checking cluster data replication... 
+1. Checking cluster connection...
+    OK - All nodes are accessible!
+2. Checking cluster data replication...
 SEEDS: [172.18.0.201:8101:rack1:dc:100, 172.18.0.202:8101:rack2:dc:100, 172.18.0.203:8101:rack3:dc:100]
 Checking Node: 172.18.0.201
   TIME to   Insert DCC_dynomite_123_kt - Value: DCC_replication_works: 5.0 ms - 0 s
@@ -153,13 +157,13 @@ Checking Node: 172.18.0.202
 Checking Node: 172.18.0.203
   TIME to   Get: DCC_dynomite_123_kt : 2.0 ms - 0 s
   200 OK - set/get working fine!
-3. Checking cluster failover... 
+3. Checking cluster failover...
 All Seeds Cluster Failover test: OK
-4. Results as JSON... 
+4. Results as JSON...
 {
  "timeToRun": "2 seconds",
  "failoverStatus": "OK",
- "badNodes": [], 
+ "badNodes": [],
  "nodesReport":
 [
   {
@@ -185,4 +189,3 @@ All Seeds Cluster Failover test: OK
 
 **** END DYNOMITE CLUSTER CHECKER ****
 ```
-
