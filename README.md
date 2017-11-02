@@ -29,6 +29,11 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 4. vagrant ssh
 5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.8
 
+### What about my data?
+
+You can dump from ypou production cluster and import it with redis-cli and redis-dump. <br>
+More information here: https://gist.github.com/diegopacheco/6c1862553a8b35a2680f914a2e08accc
+
 ## What dynomite versions are suppoorted?
 
 * 0.5.7-14 <BR>
