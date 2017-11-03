@@ -120,6 +120,14 @@ function info(){
 }
 
 function help(){
+   echo " "
+   echo "  #                                  \"      m                    #                  #                             "
+   echo "mmmm#  m   m  m mm    mmm   mmmmm  mmm    mm#mm   mmm           mmm#   mmm    mmm   #  m   mmm     m mm         "
+   echo "#\" \"#  \"m m\"  #\"  #  #\" \"#  # # #    #      #    #\"  #         #\" \"#  #\" \"#  #\"  \"  # m\"   #\"  #   #\""
+   echo "#   #   #m#   #   #  #   #  # # #    #      #    #\"\"\"\"   \"\"\"   #   #  #   #  #      #\"#    #\"\"\"\"   #     "
+   echo "\"#m##   \"#    #   #  \"#m#\"  # # #  mm#mm    \"mm  \"#mm\"         \"#m##  \"#m#\"  \"#mm\"  #  \"m  \"#mm\"   #  "
+   echo " "
+   
    echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
    echo "functions: "
    echo ""
