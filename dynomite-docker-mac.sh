@@ -3,7 +3,7 @@
 #mac_docker_ip="192.168.99.100"
 #mac_docker_ip="192.168.65.0"
 #mac_docker_ip="0.0.0.0"
-mac_docker_ip="127.0.0.1"
+mac_docker_ip="localhost"
 
 mac_dir=/Users/dynomite_docker/
 
