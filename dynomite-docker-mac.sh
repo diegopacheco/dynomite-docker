@@ -1,6 +1,7 @@
 #!/bin/bash
 
-mac_docker_ip="192.168.99.100"
+mac_docker_ip="192.168.65.0"
+mac_dir=/Users/dynomite_docker/
 
 seeds1="$mac_docker_ip:32102:rack1:dc:100|$mac_docker_ip:32103:rack2:dc:100|$mac_docker_ip:32104:rack3:dc:100"
 seeds2="$mac_docker_ip:32105:rack1:dc:100|$mac_docker_ip:32106:rack2:dc:100|$mac_docker_ip:32107:rack3:dc:100"
@@ -9,7 +10,7 @@ DV=$2
 export EC2_AVAILABILTY_ZONE=rack1
 
 function setupClusters(){
-  SHARED="$TMPDIR:/var/lib/redis/"
+  SHARED="$mac_dir/redis/:/var/lib/redis/"
   setupSingleClusters
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.201 --name dynomite21 -p 32105:8102 -e DYNOMITE_NODE=21 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.202 --name dynomite22 -p 32106:8102 -e DYNOMITE_NODE=22 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
@@ -17,13 +18,16 @@ function setupClusters(){
 }
 
 function setupSingleClusters(){
-  SHARED="$TMPDIR:/var/lib/redis/"
+  SHARED="$mac_dir/redis/:/var/lib/redis/"
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -p 32102:8102 -e DYNOMITE_NODE=1  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -p 32103:8102 -e DYNOMITE_NODE=2  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -p 32104:8102 -e DYNOMITE_NODE=3  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
 function bake(){
+   sudo mkdir $mac_dir
+   sudo mkdir $mac_dir/redis/
+   sudo mkdir $mac_dir/dcc/
    docker build -t diegopacheco/dynomitedocker . --network=host
 }
 
@@ -46,9 +50,8 @@ function setUpNetwork(){
 }
 
 function getDcc(){
-  mkdir $TMPDIR/dcc
-  cd $TMPDIR/dcc/
-  git clone https://github.com/diegopacheco/dynomite-cluster-checker > /dev/null 2>&1
+  cd $mac_dir/dcc/
+  git clone https://github.com/diegopacheco/dynomite-cluster-checker
   cd dynomite-cluster-checker/dynomite-cluster-checker
 }
 

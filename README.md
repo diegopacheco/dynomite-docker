@@ -15,9 +15,9 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 
 1. Install docker
 2. Get docker public/host IP
-3. Change dynomite-docker-mac.sh and add the DOCKER IP for MAC.
-4. (just 1 time) Bake docker images $ ./dynomite-docker-mac.sh bake
-5. Create the Dynomite clusters $ ./dynomite-docker-mac.sh run 0.5.8
+3. Change dynomite-docker-mac.sh(mac_docker_ip around line 3) and add the DOCKER IP for MAC.
+4. (just 1 time) Bake docker images $ sudo ./dynomite-docker-mac.sh bake
+5. Create the Dynomite clusters $ sudo ./dynomite-docker-mac.sh run 0.5.8
 
 #### Vagrant (native)
 
