@@ -1,6 +1,10 @@
 #!/bin/bash
 
-mac_docker_ip="192.168.65.0"
+#mac_docker_ip="192.168.99.100"
+#mac_docker_ip="192.168.65.0"
+#mac_docker_ip="0.0.0.0"
+mac_docker_ip="127.0.0.1"
+
 mac_dir=/Users/dynomite_docker/
 
 seeds1="$mac_docker_ip:32102:rack1:dc:100|$mac_docker_ip:32103:rack2:dc:100|$mac_docker_ip:32104:rack3:dc:100"
@@ -125,15 +129,14 @@ function info(){
 }
 
 function help(){
-
-echo " "
-echo "  #                                  \"      m                    #                  #                             "
-echo "mmmm#  m   m  m mm    mmm   mmmmm  mmm    mm#mm   mmm           mmm#   mmm    mmm   #  m   mmm     m mm         "
-echo "#\" \"#  \"m m\"  #\"  #  #\" \"#  # # #    #      #    #\"  #         #\" \"#  #\" \"#  #\"  \"  # m\"   #\"  #   #\""
-echo "#   #   #m#   #   #  #   #  # # #    #      #    #\"\"\"\"   \"\"\"   #   #  #   #  #      #\"#    #\"\"\"\"   #     "
-echo "\"#m##   \"#    #   #  \"#m#\"  # # #  mm#mm    \"mm  \"#mm\"         \"#m##  \"#m#\"  \"#mm\"  #  \"m  \"#mm\"   #  "
-echo " "
-echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
+   echo " "
+   echo "  #                                  \"      m                    #                  #                             "
+   echo "mmmm#  m   m  m mm    mmm   mmmmm  mmm    mm#mm   mmm           mmm#   mmm    mmm   #  m   mmm     m mm         "
+   echo "#\" \"#  \"m m\"  #\"  #  #\" \"#  # # #    #      #    #\"  #         #\" \"#  #\" \"#  #\"  \"  # m\"   #\"  #   #\""
+   echo "#   #   #m#   #   #  #   #  # # #    #      #    #\"\"\"\"   \"\"\"   #   #  #   #  #      #\"#    #\"\"\"\"   #     "
+   echo "\"#m##   \"#    #   #  \"#m#\"  # # #  mm#mm    \"mm  \"#mm\"         \"#m##  \"#m#\"  \"#mm\"  #  \"m  \"#mm\"   #  "
+   echo " "
+   echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
 
    echo "functions: "
    echo ""
