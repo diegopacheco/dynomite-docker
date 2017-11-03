@@ -15,7 +15,7 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 
 1. Install docker -> https://docs.docker.com/docker-for-mac/install/
 2. (just 1 time) Bake docker images $ sudo ./dynomite-docker-mac.sh bake
-3. Create the Dynomite clusters $ sudo ./dynomite-docker-mac.sh run 0.5.8
+3. Create the Dynomite clusters $ sudo ./dynomite-docker-mac.sh run_single 0.5.8
 
 #### Vagrant (native)
 
@@ -23,7 +23,7 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 2. Download and install Vagrant -> https://www.vagrantup.com/downloads.html
 3. vagrant up
 4. vagrant ssh
-5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.8
+5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run_single 0.5.8
 
 ### What about my data?
 
