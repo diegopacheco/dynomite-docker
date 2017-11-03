@@ -6,37 +6,21 @@ seeds1="$mac_docker_ip:32102:rack1:dc:100|$mac_docker_ip:32103:rack2:dc:100|$mac
 seeds2="$mac_docker_ip:32105:rack1:dc:100|$mac_docker_ip:32106:rack2:dc:100|$mac_docker_ip:32107:rack3:dc:100"
 DV=$2
 
-function setu_docker_machine(){
-  curl -L https://github.com/docker/machine/releases/download/v0.13.0/docker-machine-`uname -s`-`uname -m` >/usr/local/bin/docker-machine && \
-  chmod +x /usr/local/bin/docker-machine
-  docker-machine create --driver virtualbox default
-  docker-machine env default
-  eval "$(docker-machine env default)"
-}
-
-function start_docker_machine(){
-  docker-machine start default
-  docker-machine env default
-  eval "$(docker-machine env default)"
-}
-
-function stop_docker_machine(){
-  docker-machine stop default
-}
+export EC2_AVAILABILTY_ZONE=rack1
 
 function setupClusters(){
   SHARED=$TMPDIR:/var/lib/redis/
   setupSingleClusters
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.201 --name dynomite21 -p 8102:32105 -e DYNOMITE_NODE=21 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.202 --name dynomite22 -p 8102:32106 -e DYNOMITE_NODE=22 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.203 --name dynomite23 -p 8102:32107 -e DYNOMITE_NODE=23 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.201 --name dynomite21 -p 8102:32105 -e DYNOMITE_NODE=21 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.202 --name dynomite22 -p 8102:32106 -e DYNOMITE_NODE=22 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.203 --name dynomite23 -p 8102:32107 -e DYNOMITE_NODE=23 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
 function setupSingleClusters(){
   SHARED=$TMPDIR:/var/lib/redis/
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.101 --name dynomite1 -p 8102:32102 -e DYNOMITE_NODE=1  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.102 --name dynomite2 -p 8102:32103 -e DYNOMITE_NODE=2  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 172.18.0.103 --name dynomite3 -p 8102:32104 -e DYNOMITE_NODE=3  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -p 8102:32102 -e DYNOMITE_NODE=1  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -p 8102:32103 -e DYNOMITE_NODE=2  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -p 8102:32104 -e DYNOMITE_NODE=3  -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
 function bake(){
@@ -57,7 +41,7 @@ function cleanUp(){
 }
 
 function setUpNetwork(){
-  docker network create --subnet=172.18.0.0/16 myDockerNetDynomite
+  docker network create --subnet=179.18.0.0/16 myDockerNetDynomite
   docker network ls
 }
 
@@ -91,7 +75,7 @@ function run(){
       runDcc
       info
     else
-      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8 or 0.5.9"
+      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8, 0.5.9, 0.6.0"
     fi
 }
 
@@ -104,7 +88,7 @@ function runSingle(){
       setupSingleClusters
       infoSingle
     else
-      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8 or 0.5.9"
+      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8, 0.5.9, 0.6.0"
     fi
 }
 
@@ -116,7 +100,7 @@ function infoSingle(){
   echo "  rack3 - $mac_docker_ip:32104"
   echo "Seeds: $seeds1"
   echo ""
-  echo "Avaliable Dynomite version: v0.5.7, v0.5.8 and v0.5.9"
+  echo "Avaliable Dynomite version: v0.5.7, v0.5.8, v0.5.9, v0.6.0"
 }
 
 function info(){
@@ -129,12 +113,12 @@ function info(){
   echo ""
   echo "Cluster 2- Topology :"
   echo "token: 100 dc: dc"
-  echo "  rack1 - 172.18.0.201:32105"
-  echo "  rack2 - 172.18.0.202:32106"
-  echo "  rack3 - 172.18.0.203:32107"
+  echo "  rack1 - 179.18.0.201:32105"
+  echo "  rack2 - 179.18.0.202:32106"
+  echo "  rack3 - 179.18.0.203:32107"
   echo "Seeds: $seeds2"
   echo ""
-  echo "Avaliable Dynomite version: v0.5.7, v0.5.8 and v0.5.9"
+  echo "Avaliable Dynomite version: v0.5.7, v0.5.8, v0.5.9, v0.6.0"
 }
 
 function help(){

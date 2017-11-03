@@ -23,6 +23,9 @@ RUN cd /dynomite-0.5.8/dynomite/ && git checkout tags/v0.5.8-5_HgetallLocalRack
 RUN mkdir /dynomite-0.5.9/ &&  cd /dynomite-0.5.9/ && git clone https://github.com/Netflix/dynomite.git
 RUN cd /dynomite-0.5.9/dynomite/ && git checkout tags/v0.5.9-2_ProxyCloseFix
 
+RUN mkdir /dynomite-0.6.0/ &&  cd /dynomite-0.6.0/ && git clone https://github.com/Netflix/dynomite.git
+RUN cd /dynomite-0.6.0/dynomite/ && git checkout tags/v0.6.0
+
 ADD redis.conf /etc/redis/
 ADD start.sh /usr/local/dynomite/
 RUN mkdir /dynomite/ && mkdir /dynomite/conf/
@@ -50,6 +53,13 @@ RUN autoreconf -fvi \
 		&& make install
 
 WORKDIR /dynomite-0.5.9/dynomite/
+RUN autoreconf -fvi \
+		&& ./configure --enable-debug=log \
+		&& CFLAGS="-ggdb3 -O0" ./configure --enable-debug=log \
+		&& make \
+		&& make install
+
+WORKDIR /dynomite-0.6.0/dynomite/
 RUN autoreconf -fvi \
 		&& ./configure --enable-debug=log \
 		&& CFLAGS="-ggdb3 -O0" ./configure --enable-debug=log \
