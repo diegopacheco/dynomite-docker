@@ -4,25 +4,23 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 
 ## Linux: How to use it? (native)
 
-1. Download and instal Java 8
-2. Download and install Docker.
+1. Download and instal Java 8  -> http://www.oracle.com/technetwork/java/javase/downloads/index.html
+2. Download and install Docker. -> https://docs.docker.com/engine/installation/
 3. Bake docker images $ ./dynomite-docker.sh bake
 3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
 
 ## Windows/Mac: How to use it?
 
-#### Docker (Require changes on bash script)
+#### (MAC) Docker (Require changes on bash script)
 
-1. Install docker
-2. Get docker public/host IP
-3. Change dynomite-docker-mac.sh(mac_docker_ip around line 3) and add the DOCKER IP for MAC.
-4. (just 1 time) Bake docker images $ sudo ./dynomite-docker-mac.sh bake
-5. Create the Dynomite clusters $ sudo ./dynomite-docker-mac.sh run 0.5.8
+1. Install docker -> https://docs.docker.com/docker-for-mac/install/
+2. (just 1 time) Bake docker images $ sudo ./dynomite-docker-mac.sh bake
+3. Create the Dynomite clusters $ sudo ./dynomite-docker-mac.sh run 0.5.8
 
 #### Vagrant (native)
 
-1. Download and instal Virtual Box 5
-2. Download and install Vagrant
+1. Download and instal Virtual Box 5 -> https://www.virtualbox.org/wiki/Downloads
+2. Download and install Vagrant -> https://www.vagrantup.com/downloads.html
 3. vagrant up
 4. vagrant ssh
 5. Create the Dynomite clusters $ cd dynomite-docker/ && sudo ./dynomite-docker.sh run 0.5.8
