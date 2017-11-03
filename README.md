@@ -7,7 +7,7 @@ Simple Docker Image for Dynomite. Dynomite-docker provides utilities to create c
 1. Download and instal Java 8  -> http://www.oracle.com/technetwork/java/javase/downloads/index.html
 2. Download and install Docker. -> https://docs.docker.com/engine/installation/
 3. Bake docker images $ ./dynomite-docker.sh bake
-3. Create the Dynomite clusters $ ./dynomite-docker.sh run 0.5.8
+3. Create the Dynomite clusters $ ./dynomite-docker.sh run_single 0.5.8
 
 ## Windows/Mac: How to use it?
 
