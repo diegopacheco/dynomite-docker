@@ -198,6 +198,7 @@ function help(){
    echo "info        : Get Seeds, IPs and topologies(all 3 possible clusters)"
    echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
    echo "cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1"
+   echo "keys_shard  : Runs KEYS * command in all nodes(Shard Cluster)"
    echo "stop        : Stop and clean up all docker running images"
    echo "help        : help documentation"
 }
