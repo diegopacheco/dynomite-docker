@@ -2,7 +2,7 @@
 
 seeds1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100"
 seeds2="179.18.0.201:8102:rack1:dc:100|179.18.0.202:8102:rack2:dc:100|179.18.0.203:8102:rack3:dc:100"
-seedsShard1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100|179.18.0.104:8102:rack1:dc:200|179.18.0.105:8102:rack2:dc:200|179.18.0.106:8102:rack3:dc:200"
+seedsShard1="179.18.0.101:8102:rack1:dc:1383429731|179.18.0.102:8102:rack2:dc:1383429731|179.18.0.103:8102:rack3:dc:1383429731|179.18.0.104:8102:rack1:dc:2815085496|179.18.0.105:8102:rack2:dc:2815085496|179.18.0.106:8102:rack3:dc:2815085496"
 DV=$2
 
 export EC2_AVAILABILTY_ZONE=rack1
@@ -146,11 +146,11 @@ function avaliableVersions(){
 function infoShard(){
   echo "Cluster 3 Shard - Topology :"
   echo "dc: dc"
-  echo " token: 100"
+  echo " token: 1383429731"
   echo "  rack1 - 179.18.0.101"
   echo "  rack2 - 179.18.0.102"
   echo "  rack3 - 179.18.0.103"
-  echo " token: 200"
+  echo " token: 2815085496"
   echo "  rack1 - 179.18.0.104"
   echo "  rack2 - 179.18.0.105"
   echo "  rack3 - 179.18.0.106"
