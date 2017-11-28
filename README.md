@@ -68,22 +68,32 @@ echo "help        : help documentation"
 
 ## What are my seeds?
 
-Cluster 1
+Cluster 1A
 ```bash
 179.18.0.101:8101:rack1:dc:100|179.18.0.102:8101:rack2:dc:100|179.18.0.103:8101:rack3:dc:100
 ```
-Cluster 2
+Cluster 1B
 ```bash
 179.18.0.201:8101:rack1:dc:100|179.18.0.202:8101:rack2:dc:100|179.18.0.203:8101:rack3:dc:100
+```
+
+Cluster 2 - Single
+```bash
+179.18.0.101:8101:rack1:dc:100|179.18.0.102:8101:rack2:dc:100|179.18.0.103:8101:rack3:dc:100
+```
+
+Cluster 3 - Shard
+```bash
+179.18.0.101:8102:rack1:dc:1383429731|179.18.0.102:8102:rack2:dc:1383429731|179.18.0.103:8102:rack3:dc:1383429731|179.18.0.104:8102:rack1:dc:2815085496|179.18.0.105:8102:rack2:dc:2815085496|179.18.0.106:8102:rack3:dc:2815085496
 ```
 
 ## What's is the cluster Topology?
 
 ## Summary
 
-Cluster 1(1A and 1B): This cluster is create by command run        - This is ideal for Dual write tests.
-Cluster 2(Single)   : This cluster is create by command run_single - This is ideal dev tests.
-Cluster 3(Shard)    : This cluster is create by command run_shard  - This is ideal dev sharding keys tests.
+Cluster 1(1A and 1B): This cluster is create by command run        - This is ideal for Dual write tests. <BR/>
+Cluster 2(Single)   : This cluster is create by command run_single - This is ideal dev tests. <BR/>
+Cluster 3(Shard)    : This cluster is create by command run_shard  - This is ideal dev sharding keys tests. <BR/>
 
 ## Topologies
 
@@ -99,6 +109,7 @@ Cluster 1B
 node: 1 - ip: 179.18.0.201 - Tokens: 100 - Rack: rack1 - DC: dc
 node: 2 - ip: 179.18.0.202 - Tokens: 100 - Rack: rack2 - DC: dc
 node: 3 - ip: 179.18.0.203 - Tokens: 100 - Rack: rack3 - DC: dc
+```
 
 Cluster 2 - Single
 ```bash
