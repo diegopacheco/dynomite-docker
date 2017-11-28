@@ -215,6 +215,14 @@ function rediscli(){
   fi
 }
 
+function keys_shard(){
+  for i in `seq 1 6`;
+  do
+    echo "Node 179.18.0.10$i"
+    docker exec -it dynomite$i sh -c 'echo "keys *" | redis-cli -p 8102'
+  done
+}
+
 case $1 in
      "bake")
           bake
@@ -245,6 +253,9 @@ case $1 in
           ;;
       "cli")
           rediscli
+          ;;
+      "keys_shard")
+          keys_shard
           ;;
      "stop")
           cleanUp
