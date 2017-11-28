@@ -79,18 +79,44 @@ Cluster 2
 
 ## What's is the cluster Topology?
 
-Cluster 1
+## Summary
+
+Cluster 1(1A and 1B): This cluster is create by command run        - This is ideal for Dual write tests.
+Cluster 2(Single)   : This cluster is create by command run_single - This is ideal dev tests.
+Cluster 3(Shard)    : This cluster is create by command run_shard  - This is ideal dev sharding keys tests.
+
+## Topologies
+
+Cluster 1A
 ```bash
 node: 1 - ip: 179.18.0.101 - Tokens: 100 - Rack: rack1 - DC: dc
 node: 2 - ip: 179.18.0.102 - Tokens: 100 - Rack: rack2 - DC: dc
 node: 3 - ip: 179.18.0.103 - Tokens: 100 - Rack: rack3 - DC: dc
 ```
 
-Cluster 2
+Cluster 1B
 ```bash
 node: 1 - ip: 179.18.0.201 - Tokens: 100 - Rack: rack1 - DC: dc
 node: 2 - ip: 179.18.0.202 - Tokens: 100 - Rack: rack2 - DC: dc
 node: 3 - ip: 179.18.0.203 - Tokens: 100 - Rack: rack3 - DC: dc
+
+Cluster 2 - Single
+```bash
+node: 1 - ip: 179.18.0.101 - Tokens: 100 - Rack: rack1 - DC: dc
+node: 2 - ip: 179.18.0.102 - Tokens: 100 - Rack: rack2 - DC: dc
+node: 3 - ip: 179.18.0.103 - Tokens: 100 - Rack: rack3 - DC: dc
+```
+
+Cluster 3 - Shard
+```bash
+node: 1 - ip: 179.18.0.101 - Tokens: 1383429731 - Rack: rack1 - DC: dc
+node: 2 - ip: 179.18.0.102 - Tokens: 1383429731 - Rack: rack2 - DC: dc
+node: 3 - ip: 179.18.0.103 - Tokens: 1383429731 - Rack: rack3 - DC: dc
+node: 4 - ip: 179.18.0.104 - Tokens: 2815085496 - Rack: rack1 - DC: dc
+node: 5 - ip: 179.18.0.105 - Tokens: 2815085496 - Rack: rack2 - DC: dc
+node: 6 - ip: 179.18.0.106 - Tokens: 2815085496 - Rack: rack3 - DC: dc
+```
+
 ```
 
 ## Integrated with DCC checks.
