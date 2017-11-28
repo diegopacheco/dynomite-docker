@@ -40,22 +40,22 @@ More information here: https://gist.github.com/diegopacheco/6c1862553a8b35a2680f
 ## What parameters can I use?
 ```bash
 $ ./dynomite-docker.sh help
-echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
-echo "functions: "
-echo ""
-echo "bake        : Bakes docker image"
-echo "run         : Run Dynomite docker 2 clusters for dual write"
-echo "run_single  : Run Dynomite docker Single cluster"
-echo "run_shard   : Run Dynomite docker Shard cluster"
-echo "dcc         : Run Dynomite Cluster Checker for 2 clusters"
-echo "dcc_single  : Run Dynomite Cluster Checker for single cluster"
-echo "dcc_shard   : Run Dynomite Cluster Checker for shard cluster"
-echo "info        : Get Seeds, IPs and topologies(all 3 possible clusters)"
-echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
-echo "cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1"
-echo "keys_shard  : Runs KEYS * command in all nodes(Shard Cluster)"
-echo "stop        : Stop and clean up all docker running images"
-echo "help        : help documentation"
+dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco.
+functions: 
+
+bake        : Bakes docker image
+run         : Run Dynomite docker 2 clusters for dual write
+run_single  : Run Dynomite docker Single cluster
+run_shard   : Run Dynomite docker Shard cluster
+dcc         : Run Dynomite Cluster Checker for 2 clusters
+dcc_single  : Run Dynomite Cluster Checker for single cluster
+dcc_shard   : Run Dynomite Cluster Checker for shard cluster
+info        : Get Seeds, IPs and topologies(all 3 possible clusters)
+log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1
+cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1
+keys_shard  : Runs KEYS * command in all nodes(Shard Cluster)
+stop        : Stop and clean up all docker running images
+help        : help documentation
 ```
 
 ## How it works?
@@ -126,8 +126,6 @@ node: 3 - ip: 179.18.0.103 - Tokens: 1383429731 - Rack: rack3 - DC: dc
 node: 4 - ip: 179.18.0.104 - Tokens: 2815085496 - Rack: rack1 - DC: dc
 node: 5 - ip: 179.18.0.105 - Tokens: 2815085496 - Rack: rack2 - DC: dc
 node: 6 - ip: 179.18.0.106 - Tokens: 2815085496 - Rack: rack3 - DC: dc
-```
-
 ```
 
 ## Integrated with DCC checks.
