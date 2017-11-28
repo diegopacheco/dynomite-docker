@@ -2,6 +2,7 @@
 
 seeds1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100"
 seeds2="179.18.0.201:8102:rack1:dc:100|179.18.0.202:8102:rack2:dc:100|179.18.0.203:8102:rack3:dc:100"
+seedsShard1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100|179.18.0.104:8102:rack4:dc:200|179.18.0.105:8102:rack5:dc:200|179.18.0.106:8102:rack6:dc:200"
 DV=$2
 
 export EC2_AVAILABILTY_ZONE=rack1
@@ -43,6 +44,16 @@ function setupSingleClusters(){
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -e DYNOMITE_NODE=3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
+function setupShardCluster(){
+  SHARED=/usr/local/docker-shared/dynomite/:/var/lib/redis/
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -e DYNOMITE_NODE=6S1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -e DYNOMITE_NODE=6S2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -e DYNOMITE_NODE=6S3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.104 --name dynomite4 -e DYNOMITE_NODE=6S4 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.105 --name dynomite5 -e DYNOMITE_NODE=6S5 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.106 --name dynomite6 -e DYNOMITE_NODE=6S6 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+}
+
 function getDcc(){
   mkdir /tmp/dcc > /dev/null 2>&1
   cd /tmp/dcc/
@@ -63,6 +74,26 @@ function runDccSingle(){
   docker ps
 }
 
+function runDccShard(){
+  getDcc
+  ./gradlew execute -Dexec.args="$seedsShard1"
+  docker ps
+}
+
+function runShard(){
+    echo "$DV"
+    if [[ "$DV" = *[!\ ]* ]];
+    then
+      cleanUp
+      setUpNetwork
+      setupShardCluster
+      runDccShard
+      infoShard
+    else
+      missingVerion
+    fi
+}
+
 function run(){
     echo "$DV"
     if [[ "$DV" = *[!\ ]* ]];
@@ -73,7 +104,7 @@ function run(){
       runDcc
       info
     else
-      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8, 0.5.9, 0.6.0"
+      missingVerion
     fi
 }
 
@@ -86,37 +117,63 @@ function runSingle(){
       setupSingleClusters
       infoSingle
     else
-      echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8, 0.5.9, 0.6.0"
+      missingVerion
     fi
 }
 
-function infoSingle(){
-  echo "Cluster 1 - Topology :"
-  echo "token: 100 dc: dc"
-  echo "  rack1 - 179.18.0.101"
-  echo "  rack2 - 179.18.0.102"
-  echo "  rack3 - 179.18.0.103"
-  echo "Seeds: $seeds1"
-  echo ""
+function missingVerion(){
+  echo "Mising Dynomite version! Aborting! You need pass the version: 0.5.7, 0.5.8, 0.5.9, 0.6.0"
+}
+
+function avaliableVersions(){
   echo "Avaliable Dynomite version: v0.5.7, v0.5.8, v0.5.9, v0.6.0"
 }
 
-function info(){
-  echo "Cluster 1 - Topology :"
+function infoShard(){
+  echo "Cluster 3 Shard - Topology :"
+  echo "dc: dc"
+  echo " token: 100"
+  echo "  rack1 - 179.18.0.101"
+  echo "  rack2 - 179.18.0.102"
+  echo "  rack3 - 179.18.0.103"
+  echo " token: 200"
+  echo "  rack4 - 179.18.0.104"
+  echo "  rack5 - 179.18.0.105"
+  echo "  rack6 - 179.18.0.106"
+  echo "Seeds: $seedsShard1"
+  echo ""
+  avaliableVersions
+}
+
+function infoSingle(){
+  echo "Cluster 2 Single - Topology :"
   echo "token: 100 dc: dc"
   echo "  rack1 - 179.18.0.101"
   echo "  rack2 - 179.18.0.102"
   echo "  rack3 - 179.18.0.103"
   echo "Seeds: $seeds1"
   echo ""
-  echo "Cluster 2- Topology :"
+  avaliableVersions
+}
+
+function info(){
+  echo "Cluster 1A - Topology :"
+  echo "token: 100 dc: dc"
+  echo "  rack1 - 179.18.0.101"
+  echo "  rack2 - 179.18.0.102"
+  echo "  rack3 - 179.18.0.103"
+  echo "Seeds: $seeds1"
+  echo ""
+  echo "Cluster 1B - Topology :"
   echo "token: 100 dc: dc"
   echo "  rack1 - 179.18.0.201"
   echo "  rack2 - 179.18.0.202"
   echo "  rack3 - 179.18.0.203"
   echo "Seeds: $seeds2"
   echo ""
-  echo "Avaliable Dynomite version: v0.5.7, v0.5.8, v0.5.9, v0.6.0"
+  infoSingle
+  infoShard
+  avaliableVersions
 }
 
 function help(){
@@ -127,16 +184,18 @@ function help(){
    echo "#   #   #m#   #   #  #   #  # # #    #      #    #\"\"\"\"   \"\"\"   #   #  #   #  #      #\"#    #\"\"\"\"   #     "
    echo "\"#m##   \"#    #   #  \"#m#\"  # # #  mm#mm    \"mm  \"#mm\"         \"#m##  \"#m#\"  \"#mm\"  #  \"m  \"#mm\"   #  "
    echo " "
-   
+
    echo "dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco."
    echo "functions: "
    echo ""
    echo "bake        : Bakes docker image"
    echo "run         : Run Dynomite docker 2 clusters for dual write"
    echo "run_single  : Run Dynomite docker Single cluster"
+   echo "run_shard   : Run Dynomite docker Shard cluster"
    echo "dcc         : Run Dynomite Cluster Checker for 2 clusters"
    echo "dcc_single  : Run Dynomite Cluster Checker for single cluster"
-   echo "info        : Get Seeds, IPs and topologies"
+   echo "dcc_shard   : Run Dynomite Cluster Checker for shard cluster"
+   echo "info        : Get Seeds, IPs and topologies(all 3 possible clusters)"
    echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
    echo "cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1"
    echo "stop        : Stop and clean up all docker running images"
@@ -163,6 +222,9 @@ case $1 in
      "run")
           run
           ;;
+     "run_shard")
+          runShard
+          ;;
      "run_single")
           runSingle
           ;;
@@ -171,6 +233,9 @@ case $1 in
           ;;
      "dcc_single")
           runDccSingle
+          ;;
+     "dcc_single")
+          runDccShard
           ;;
      "info")
           info

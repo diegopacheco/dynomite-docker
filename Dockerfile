@@ -35,6 +35,12 @@ COPY redis_cluster_3.yml /dynomite/conf/redis_cluster_3.yml
 COPY redis_cluster_21.yml /dynomite/conf/redis_cluster_21.yml
 COPY redis_cluster_22.yml /dynomite/conf/redis_cluster_22.yml
 COPY redis_cluster_23.yml /dynomite/conf/redis_cluster_23.yml
+COPY redis_cluster_6S1.yml /dynomite/conf/redis_cluster_6S1.yml
+COPY redis_cluster_6S2.yml /dynomite/conf/redis_cluster_6S2.yml
+COPY redis_cluster_6S3.yml /dynomite/conf/redis_cluster_6S3.yml
+COPY redis_cluster_6S4.yml /dynomite/conf/redis_cluster_6S4.yml
+COPY redis_cluster_6S5.yml /dynomite/conf/redis_cluster_6S5.yml
+COPY redis_cluster_6S6.yml /dynomite/conf/redis_cluster_6S6.yml
 
 RUN chmod 777 /usr/local/dynomite/start.sh
 
