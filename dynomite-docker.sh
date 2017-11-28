@@ -20,6 +20,10 @@ function cleanUp(){
   docker stop dynomite22 &>/dev/null ; docker rm dynomite22 > /dev/null 2>&1
   docker stop dynomite23 &>/dev/null ; docker rm dynomite23 > /dev/null 2>&1
 
+  docker stop dynomite4 &>/dev/null ; docker rm dynomite4 > /dev/null 2>&1
+  docker stop dynomite5 &>/dev/null ; docker rm dynomite5 > /dev/null 2>&1
+  docker stop dynomite6 &>/dev/null ; docker rm dynomite6 > /dev/null 2>&1
+
   docker network rm myDockerNetDynomite > /dev/null 2>&1
   echo "Docker images and Network clean up DONE."
 }
@@ -45,12 +49,22 @@ function setupSingleClusters(){
 }
 
 function setupShardCluster(){
-  SHARED=/usr/local/docker-shared/dynomite/:/var/lib/redis/
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-1/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -e DYNOMITE_NODE=6S1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-2/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -e DYNOMITE_NODE=6S2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-3/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -e DYNOMITE_NODE=6S3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-4/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.104 --name dynomite4 -e DYNOMITE_NODE=6S4 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-5/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.105 --name dynomite5 -e DYNOMITE_NODE=6S5 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+
+  SHARED=/usr/local/docker-shared/dynomite-shard-redis-6/:/var/lib/redis/
   docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.106 --name dynomite6 -e DYNOMITE_NODE=6S6 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
