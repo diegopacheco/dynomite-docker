@@ -2,7 +2,7 @@
 
 seeds1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100"
 seeds2="179.18.0.201:8102:rack1:dc:100|179.18.0.202:8102:rack2:dc:100|179.18.0.203:8102:rack3:dc:100"
-seedsShard1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100|179.18.0.104:8102:rack4:dc:200|179.18.0.105:8102:rack5:dc:200|179.18.0.106:8102:rack6:dc:200"
+seedsShard1="179.18.0.101:8102:rack1:dc:100|179.18.0.102:8102:rack2:dc:100|179.18.0.103:8102:rack3:dc:100|179.18.0.104:8102:rack1:dc:200|179.18.0.105:8102:rack2:dc:200|179.18.0.106:8102:rack3:dc:200"
 DV=$2
 
 export EC2_AVAILABILTY_ZONE=rack1
@@ -137,9 +137,9 @@ function infoShard(){
   echo "  rack2 - 179.18.0.102"
   echo "  rack3 - 179.18.0.103"
   echo " token: 200"
-  echo "  rack4 - 179.18.0.104"
-  echo "  rack5 - 179.18.0.105"
-  echo "  rack6 - 179.18.0.106"
+  echo "  rack1 - 179.18.0.104"
+  echo "  rack2 - 179.18.0.105"
+  echo "  rack3 - 179.18.0.106"
   echo "Seeds: $seedsShard1"
   echo ""
   avaliableVersions
@@ -220,7 +220,7 @@ function keys_shard(){
   for i in `seq 1 6`;
   do
     echo "Node 179.18.0.10$i"
-    docker exec -it dynomite$i sh -c 'echo "keys *" | redis-cli -p 8102'
+    docker exec -it dynomite$i sh -c 'echo "keys *" | redis-cli -p 6379'
   done
 }
 
