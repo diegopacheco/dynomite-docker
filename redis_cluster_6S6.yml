@@ -16,3 +16,5 @@ dyn_o_mite:
   servers:
   - 127.0.0.1:6379:1
   tokens: '2815085496'
+  write_consistency: DC_QUORUM
+  read_consistency: DC_ONE
