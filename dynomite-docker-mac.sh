@@ -225,6 +225,7 @@ function help(){
    echo "info        : Get Seeds, IPs and topologies(all 3 possible clusters)"
    echo "log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1"
    echo "cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1"
+   echo "keys_single : Runs KEYS * command in all nodes(Single Cluster)"
    echo "keys_shard  : Runs KEYS * command in all nodes(Shard Cluster)"
    echo "stop        : Stop and clean up all docker running images"
    echo "help        : help documentation"
@@ -245,6 +246,14 @@ function rediscli(){
 
 function keys_shard(){
   for i in `seq 1 6`;
+  do
+    echo "Node 179.18.0.10$i"
+    docker exec -it dynomite$i sh -c 'echo "keys *" | redis-cli -p 6379'
+  done
+}
+
+function keys_single(){
+  for i in `seq 1 3`;
   do
     echo "Node 179.18.0.10$i"
     docker exec -it dynomite$i sh -c 'echo "keys *" | redis-cli -p 6379'
@@ -285,9 +294,12 @@ case $1 in
       "keys_shard")
           keys_shard
           ;;
-     "stop")
+      "keys_single")
+          keys_single
+          ;;
+      "stop")
           cleanUp
           ;;
-     *)
+      *)
           help
 esac

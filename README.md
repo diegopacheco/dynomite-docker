@@ -41,7 +41,7 @@ More information here: https://gist.github.com/diegopacheco/6c1862553a8b35a2680f
 ```bash
 $ ./dynomite-docker.sh help
 dynomite-docker: easy setup for dynomite clusters for development. Created by: Diego Pacheco.
-functions: 
+functions:
 
 bake        : Bakes docker image
 run         : Run Dynomite docker 2 clusters for dual write
@@ -53,6 +53,7 @@ dcc_shard   : Run Dynomite Cluster Checker for shard cluster
 info        : Get Seeds, IPs and topologies(all 3 possible clusters)
 log         : Print dynomite logs, you need pass the node number. i.e: ./dynomite-docker log 1
 cli         : Enters redis-cli on dynomite port. i.e: ./dynomite-docker cli 1
+keys_single : Runs KEYS * command in all nodes(Single Cluster)
 keys_shard  : Runs KEYS * command in all nodes(Shard Cluster)
 stop        : Stop and clean up all docker running images
 help        : help documentation
