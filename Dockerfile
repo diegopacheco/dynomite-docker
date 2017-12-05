@@ -27,7 +27,6 @@ RUN mkdir /dynomite-0.6.0/ &&  cd /dynomite-0.6.0/ && git clone https://github.c
 RUN cd /dynomite-0.6.0/dynomite/ && git checkout tags/v0.6.0
 
 ADD redis.conf /etc/redis/
-ADD redis-mac.conf /etc/redis/
 ADD start.sh /usr/local/dynomite/
 RUN mkdir /dynomite/ && mkdir /dynomite/conf/
 COPY redis_cluster_1.yml /dynomite/conf/redis_cluster_1.yml
