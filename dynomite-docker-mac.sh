@@ -16,22 +16,22 @@ export EC2_AVAILABILTY_ZONE=rack1
 
 function setupShardCluster(){
   SHARED="$mac_dir/dynomite-shard-redis-1/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -p 32105:8102 -e DYNOMITE_NODE=6S1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.101 --name dynomite1 -p 32105:8102 -p 31105:6379 -e DYNOMITE_NODE=6S1 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 
   SHARED="$mac_dir/dynomite-shard-redis-2/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -p 32106:8102 -e DYNOMITE_NODE=6S2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.102 --name dynomite2 -p 32106:8102 -p 31106:6379 -e DYNOMITE_NODE=6S2 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 
   SHARED="$mac_dir/dynomite-shard-redis-3/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -p 32107:8102 -e DYNOMITE_NODE=6S3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.103 --name dynomite3 -p 32107:8102 -p 31107:6379 -e DYNOMITE_NODE=6S3 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 
   SHARED="$mac_dir/dynomite-shard-redis-4/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.104 --name dynomite4 -p 32108:8102 -e DYNOMITE_NODE=6S4 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.104 --name dynomite4 -p 32108:8102 -p 31108:6379 -e DYNOMITE_NODE=6S4 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 
   SHARED="$mac_dir/dynomite-shard-redis-5/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.105 --name dynomite5 -p 32109:8102 -e DYNOMITE_NODE=6S5 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.105 --name dynomite5 -p 32109:8102 -p 31109:6379 -e DYNOMITE_NODE=6S5 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 
   SHARED="$mac_dir/dynomite-shard-redis-6/:/var/lib/redis/"
-  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.106 --name dynomite6 -p 32110:8102 -e DYNOMITE_NODE=6S6 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
+  docker run -d -v $SHARED --net myDockerNetDynomite --ip 179.18.0.106 --name dynomite6 -p 32110:8102 -p 31110:6379 -e DYNOMITE_NODE=6S6 -e DYNOMITE_VERSION=$DV diegopacheco/dynomitedocker
 }
 
 function setupClusters(){
