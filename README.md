@@ -230,3 +230,10 @@ All Seeds Cluster Failover test: OK
 
 **** END DYNOMITE CLUSTER CHECKER ****
 ```
+
+
+## Similar projects
+
+* cassandra-docker        -> https://github.com/diegopacheco/cassandra-docker
+* dynomite-dooker-rocksdb -> https://github.com/diegopacheco/dynomite-docker-rocksdb
+
